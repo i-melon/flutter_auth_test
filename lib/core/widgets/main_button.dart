@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_auth_test/core/color_data.dart';
 
 class MainButton extends StatelessWidget {
@@ -13,7 +14,18 @@ class MainButton extends StatelessWidget {
         margin: EdgeInsets.symmetric(horizontal: 16),
         child: CupertinoButton(
             borderRadius: BorderRadius.circular(6),
-            onPressed: () {},
+            onPressed: () => showDialog<String>(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    title: const Text('Данная функция находится в разработке'),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, 'OK'),
+                        child: const Text('Буду ждать =)'),
+                      ),
+                    ],
+                  ),
+                ),
             color: mainColor,
             child: Text(
               title,

@@ -14,7 +14,8 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(
-        tabBar: CupertinoTabBar(activeColor: mainColor, items: [
+        tabBar:
+            CupertinoTabBar(currentIndex: 3, activeColor: mainColor, items: [
           BottomNavigationBarItem(
             activeIcon: Container(
                 height: 17,
