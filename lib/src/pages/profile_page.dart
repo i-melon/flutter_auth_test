@@ -5,11 +5,26 @@ import 'package:flutter_auth_test/core/title_text.dart';
 import 'package:flutter_auth_test/core/widgets/dev_helper.dart';
 import 'package:flutter_auth_test/core/widgets/profile_component.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatelessWidget {
   static var page;
-
-  const ProfilePage({super.key});
+  final name;
+  final email;
+  ProfilePage({super.key, required this.email, required this.name});
+  Future<Map<String, String>> getTokens() async {
+    final prefs = await SharedPreferences.getInstance();
+    final accessToken = prefs.getString('access_token') ?? '';
+    final refreshToken = prefs.getString('refresh_token') ?? '';
+    final email = prefs.getString('email') ?? '';
+    final nick = prefs.getString('nick') ?? '';
+    return {
+      'access_token': accessToken,
+      'refresh_token': refreshToken,
+      'nick': nick,
+      'email': email
+    };
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +94,10 @@ class ProfilePage extends StatelessWidget {
           return CupertinoTabView(
             builder: (BuildContext context) {
               if (index == 3) {
-                return ProfileComponent();
+                return ProfileComponent(
+                  name: name,
+                  email: email,
+                );
               } else {
                 return DevHelper();
               }

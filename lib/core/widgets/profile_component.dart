@@ -3,12 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_auth_test/core/color_data.dart';
 import 'package:flutter_auth_test/core/title_text.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileComponent extends StatelessWidget {
-  const ProfileComponent({super.key});
+  ProfileComponent({super.key, required this.email, required this.name});
+  final String name;
+  final String email;
 
-  static const String name = 'Марипбек Чингиз';
-  static const String email = 'maripbekoff@gmail.com';
+  Future<void> clearStorage() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +60,11 @@ class ProfileComponent extends StatelessWidget {
                 children: [
                   CupertinoButton(
                       borderRadius: BorderRadius.circular(0),
-                      onPressed: () => context.go('/'),
+                      onPressed: () {
+                        clearStorage();
+
+                        context.go('/');
+                      },
                       child: Text(
                         'Выйти',
                         style: const TextStyle(

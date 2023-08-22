@@ -10,14 +10,6 @@ final GoRouter router = GoRouter(
       builder: (BuildContext context, GoRouterState state) {
         return HomePage();
       },
-      routes: <RouteBase>[
-        GoRoute(
-          path: 'profile',
-          builder: (BuildContext context, GoRouterState state) {
-            return ProfilePage();
-          },
-        ),
-      ],
     ),
   ],
 );
